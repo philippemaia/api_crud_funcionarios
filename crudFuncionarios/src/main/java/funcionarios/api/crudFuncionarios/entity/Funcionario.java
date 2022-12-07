@@ -50,4 +50,8 @@ public class Funcionario {
             this.endereco.atualizarInformacoes(dto.endereco());
         }
     }
+
+    public void excluir() {
+        this.ativo = false;
+    }
 }
