@@ -1,5 +1,6 @@
 package funcionarios.api.crudFuncionarios.entity;
 
+import funcionarios.api.crudFuncionarios.dto.AtualizacaoFuncionarioDTO;
 import funcionarios.api.crudFuncionarios.dto.CadastroFuncionarioDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,4 +39,15 @@ public class Funcionario {
         this.endereco = new Endereco(dto.endereco());
     }
 
+    public void atualizarInformacoes(AtualizacaoFuncionarioDTO dto) {
+        if(dto.nome() != null) {
+            this.nome = dto.nome();
+        }
+        if(dto.telefone() != null){
+            this.telefone = dto.telefone();
+        }
+        if(dto.endereco() != null){
+            this.endereco.atualizarInformacoes(dto.endereco());
+        }
+    }
 }

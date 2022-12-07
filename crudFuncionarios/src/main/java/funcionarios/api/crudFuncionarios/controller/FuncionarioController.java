@@ -1,5 +1,6 @@
 package funcionarios.api.crudFuncionarios.controller;
 
+import funcionarios.api.crudFuncionarios.dto.AtualizacaoFuncionarioDTO;
 import funcionarios.api.crudFuncionarios.dto.CadastroFuncionarioDTO;
 import funcionarios.api.crudFuncionarios.dto.ListagemFuncionariosDTO;
 import funcionarios.api.crudFuncionarios.entity.Funcionario;
@@ -30,6 +31,13 @@ public class FuncionarioController {
     @GetMapping
     public Page<ListagemFuncionariosDTO> consultar(@PageableDefault(size = 10, page = 0, sort = {"nome"}) Pageable paginacao){
         return repository.findAll(paginacao).map(ListagemFuncionariosDTO::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid AtualizacaoFuncionarioDTO dto){
+        Funcionario funcionario = repository.getReferenceById(dto.id());
+        funcionario.atualizarInformacoes(dto);
     }
 
 }
